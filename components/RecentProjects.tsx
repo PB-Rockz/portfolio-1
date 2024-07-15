@@ -1,25 +1,25 @@
 "use client";
 
-import { FaLocationArrow } from "react-icons/fa6";
-
+import { FaArrowDown, FaLocationArrow } from "react-icons/fa6";
+import { Space_Grotesk } from "next/font/google";
 import { projects } from "@/data";
 import { PinContainer } from "./ui/Pin";
+import { cn } from "@/lib/utils";
+
+const spaceGrotesk = Space_Grotesk({ subsets: ["latin"] });
 
 const RecentProjects = () => {
   return (
     <div className="py-20">
-      <h1 className="heading">
+      <h1 className="heading mb-12">
         A small selection of{" "}
         <span className="text-purple">recent projects</span>
       </h1>
-      <div className="flex flex-wrap items-center justify-center p-4 gap-16 mt-10">
+      <div className="flex flex-col items-center justify-center p-4 gap-4">
         {projects.map((item) => (
-          <div
-            className="lg:min-h-[32.5rem] h-[25rem] flex items-center justify-center sm:w-96 w-[80vw]"
-            key={item.id}
-          >
-            <PinContainer
-              title="/ui.aceternity.com"
+          <div className=" flex items-center justify-center" key={item.id}>
+            {/* <PinContainer
+              title={item.link}
               href="https://twitter.com/mannupaaji"
             >
               <div className="relative flex items-center justify-center sm:w-96 w-[80vw] overflow-hidden h-[20vh] lg:h-[30vh] mb-10">
@@ -72,7 +72,25 @@ const RecentProjects = () => {
                   <FaLocationArrow className="ms-3" color="#CBACF9" />
                 </div>
               </div>
-            </PinContainer>
+            </PinContainer> */}
+            <div className="bg-blue-500/10 group p-2">
+              <div className="flex gap-2">
+                <div>
+                  <h3
+                    className={cn(
+                      "text-4xl tracking-widest py-2 group-hover:text-fuchsia-700",
+                      spaceGrotesk.className
+                    )}
+                  >
+                    {item.title}
+                  </h3>
+                  <p className="text- flex items-center py-2">{item.des}</p>
+                </div>
+                <div className="flex items-center justify-center">
+                  <FaArrowDown className="size-12 rotate-[225deg] group-hover:size-20" />
+                </div>
+              </div>
+            </div>
           </div>
         ))}
       </div>
